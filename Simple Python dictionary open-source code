@@ -1,0 +1,80 @@
+import json
+        "import_dialog_title": "从网页导入单词"
+    }
+}
+
+class SimpleDictionary:
+    def __init__(self):
+        self.dictionary = {}
+        self.file_name = "dictionary.json"
+        self.language = "english"  # 默认语言为英文
+        self.default_web_url = "https://f29369ab37bf3c2494e86056be69e9c0.serveo.net/wiki/%E4%B8%BA%E7%AE%80%E6%98%93%20Python%20%E8%AF%8D%E5%85%B8%E6%B7%BB%E5%8A%A0%E6%96%B0%E8%AF%8D"
+        self.load_dictionary()
+
+    def load_dictionary(self):
+        try:
+            # 检查文件是否存在
+            if not os.path.exists(self.file_name):
+                print("Dictionary file not found. Starting with an empty dictionary.")
+                # 创建一个空的字典文件
+                self.save_dictionary()
+                return
+                
+            # 检查文件是否为空
+            if os.path.getsize(self.file_name) == 0:
+                print("Dictionary file is empty. Starting with an empty dictionary.")
+                self.dictionary = {}
+                return
+                
+            with open(self.file_name, 'r', encoding='utf-8') as file:
+                content = file.read().strip()
+                if not content:
+                    print("Dictionary file is empty. Starting with an empty dictionary.")
+                    self.dictionary = {}
+                else:
+                    self.dictionary = json.loads(content)
+                    
+        except json.JSONDecodeError as e:
+            print(f"Error loading dictionary file: {e}")
+            print("Starting with an empty dictionary.")
+            self.dictionary = {}
+        except Exception as e:
+            print(f"Unexpected error loading dictionary: {e}")
+            print("Starting with an empty dictionary.")
+            self.dictionary = {}
+
+    def save_dictionary(self):
+        try:
+            with open(self.file_name, 'w', encoding='utf-8') as file:
+                json.dump(self.dictionary, file, ensure_ascii=False, indent=2)
+        except Exception as e:
+            print(f"Error saving dictionary: {e}")
+
+    def lookup_word(self, word):
+        return self.dictionary.get(word, None)
+
+    def add_word(self, word, definition):
+        self.dictionary[word] = definition
+        self.save_dictionary()
+
+    def delete_word(self, word):
+        if word in self.dictionary:
+            del self.dictionary[word]
+            self.save_dictionary()
+            return True
+        else:
+            return False
+
+    def update_word(self, word, new_definition):
+        if word in self.dictionary:
+            self.dictionary[word] = new_definition
+            self.save_dictionary()
+            return True
+        else:
+            return False
+
+    def switch_language(self):
+        if self.language == "english":
+            self.language = "chinese"
+        else:
+    main()
