@@ -128,7 +128,7 @@ class SimpleDictionary:
         self.dictionary = {}
         self.file_name = "dictionary.json"
         self.language = "english"  # 默认语言为英文
-        self.default_web_url = "https://f29369ab37bf3c2494e86056be69e9c0.serveo.net/wiki/%E4%B8%BA%E7%AE%80%E6%98%93%20Python%20%E8%AF%8D%E5%85%B8%E6%B7%BB%E5%8A%A0%E6%96%B0%E8%AF%8D"
+        self.default_web_url = "https://community.loca.lt/wiki/%E4%B8%BA%E7%AE%80%E6%98%93%20Python%20%E8%AF%8D%E5%85%B8%E6%B7%BB%E5%8A%A0%E6%96%B0%E8%AF%8D"
         self.load_dictionary()
 
     def load_dictionary(self):
@@ -738,4 +738,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
